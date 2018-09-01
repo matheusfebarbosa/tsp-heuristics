@@ -4,6 +4,9 @@
 #include <fstream>
 #include <string>
 #include <cmath>
+#include <set>
+
+#define INF 0x6f6f6f
 
 class Point{
 public:	
@@ -27,5 +30,6 @@ public:
 	int init_graph(int v_n, std::vector <Point> pts, char type);
 	int read_graph(std::string file_name);
 	void print_graph();
+	int nn_tsp(int source, std::vector<int> &path);
 
 };

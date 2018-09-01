@@ -73,6 +73,39 @@ int Graph::read_graph(string file_name){
 	return 0;
 }
 
+int Graph::nn_tsp(int source, vector<int> &path){
+
+	set<int> in;
+	int a = source;
+	int nearest,inn,sum=0;
+
+	for(int i = 0; i<n; i++){
+		in.insert(i);
+	}
+
+	in.erase(source);
+	path.push_back(source);
+
+	while(!in.empty()){
+		nearest = INF;
+		for(b : in){
+			if(adj_matrix[a*n+b]<nearest){
+				inn = b;
+				nearest = adj_matrix[a*n+b];
+			}
+		}
+
+		sum += nearest;
+		a = inn;
+		in.erase(a);
+		path.push_back(a);
+	}
+
+	sum+=adj_matrix[a*n+source];
+
+	return sum;
+}
+
 void Graph::print_graph(){
 	for(int i = 0; i<n; i++){
 		for(int j = 0; j<n; j++){
