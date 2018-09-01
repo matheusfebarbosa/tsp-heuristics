@@ -31,5 +31,6 @@ public:
 	int read_graph(std::string file_name);
 	void print_graph();
 	int nn_tsp(int source, std::vector<int> &path);
+	int multi_nn_tsp(std::vector<int> &path);
 
 };

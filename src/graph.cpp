@@ -106,6 +106,22 @@ int Graph::nn_tsp(int source, vector<int> &path){
 	return sum;
 }
 
+int Graph::multi_nn_tsp(vector<int> &path){
+
+	vector<int> aux;
+	int best = INF, ans;
+
+	for(int i = 0; i<n; i++){
+		ans = nn_tsp(i,path);
+		if(ans < best){
+			best = ans;
+			path = aux;
+		}
+	}
+
+	return best;
+}
+
 void Graph::print_graph(){
 	for(int i = 0; i<n; i++){
 		for(int j = 0; j<n; j++){

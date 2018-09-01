@@ -12,7 +12,13 @@ int main(int agr_c,char **arg_v){
 
 	//g.print_graph();
 
-	cout << g.nn_tsp(0,path);
+	clock_t begin = clock();
+	cout << "Answer: " << g.multi_nn_tsp(path) << endl;
+  	clock_t end = clock();
+
+  	double time = double(end - begin) / CLOCKS_PER_SEC;
+
+  	cout << "Time: " << time << endl;
 
 	return 0;
 }
