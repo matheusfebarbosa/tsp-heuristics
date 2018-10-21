@@ -39,5 +39,6 @@ public:
 	void opt_2_rec(std::vector<int> &path);
 	int opt_2(std::vector<int> &path);
 	int opt_2_test(std::vector<int> &path,int a,int b);
-
+	int opt_2_ver(std::vector<int> &path,int a,int b);
+	int tabu_search(std::vector<int> &path);
 };

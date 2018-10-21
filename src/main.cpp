@@ -20,11 +20,13 @@ int main(int agr_c,char **arg_v){
 	clock_t begin = clock();
 
 	//Generate initial solution with nearest neighbor heuristic
-	g.multi_nn_tsp(path);
+	cout << "Answer NN: " << g.multi_nn_tsp(path) << endl;
 	//First do a local search in a smaller neighborhood with 2-opt
 	g.opt_2(path);
 	//Get a better answer searching with 3-opt
-	cout << "Answer: " << g.opt_3(path) << endl;
+	cout << "Answer VND: " << g.opt_3(path) << endl;
+
+	cout << "Answer Tabu Search: " << g.tabu_search(path) << endl;
 
   	clock_t end = clock();
 

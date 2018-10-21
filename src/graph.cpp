@@ -1,5 +1,10 @@
 #include "graph.h"
 
+#define MAX_ROUNDS 3000
+#define MAX_ROUNDS_WI 10
+#define TABU_ROUNDS 7
+#define INF_NEG (-999999)
+
 using namespace std;
 
 int Graph::init_graph(int vx_n, vector <Point> pts, char type){
@@ -244,4 +249,48 @@ void Graph::print_graph(){
 		}
 		cout << "\n\n";
 	}
+}
+
+int Graph::opt_2_ver(vector<int> &path,int a,int b){
+	int A = path[(a==0) ? n-1 : a-1], B = path[a], 
+	C = path[b-1], D = path[b%n];
+
+	int d0 = adj_matrix[A*n + B] + adj_matrix[C*n + D];
+	int d1 = adj_matrix[A*n + C] + adj_matrix[B*n + D];
+
+	return d0-d1;
+}
+
+
+int Graph::tabu_search(vector<int> &path){
+	int best_improve;
+	int next_a,next_b;
+
+	vector<vector<int>> tabu_list(n+1, vector<int>(n+1,0));
+	
+	for (int it = 0; it < MAX_ROUNDS; it++){
+		best_improve = INF_NEG;
+
+		for(int i = 0; i < n; i++){
+			for(int j = i+2; j < (n + (i==0 ? -1 : i==1 ? 0 : 1 )); j++){
+				int improve = opt_2_ver(path,i,j);
+
+				if((improve > best_improve && tabu_list[i][j]<=it)
+					|| improve > 0){
+					next_a = i;
+					next_b = j;
+					best_improve = improve;
+				}
+			}
+		}
+		
+		reverse(path,next_a,next_b-1);
+
+		int tabu = rand() % 10 + 3; 
+
+		tabu_list[next_a][next_b] = it + tabu;
+		tabu_list[next_b][next_a] = it + tabu;
+	}
+
+	return sum_up(path);
 }
