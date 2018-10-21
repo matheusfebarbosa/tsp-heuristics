@@ -1,4 +1,5 @@
 #Author: Matheus Felipe Eduardo Barbosa
+all: TP
 
 TP: main.o graph.o
 	g++ main.o graph.o -o tp -std=c++1z -Wall -Wextra -pedantic
