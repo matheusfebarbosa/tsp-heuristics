@@ -32,5 +32,12 @@ public:
 	void print_graph();
 	int nn_tsp(int source, std::vector<int> &path);
 	int multi_nn_tsp(std::vector<int> &path);
+	int sum_up(std::vector<int> &path);
+	void opt_3_rec(std::vector<int> &path);
+	int opt_3(std::vector<int> &path);
+	int opt_3_test(std::vector<int> &path,int a,int b, int c);
+	void opt_2_rec(std::vector<int> &path);
+	int opt_2(std::vector<int> &path);
+	int opt_2_test(std::vector<int> &path,int a,int b);
 
 };
