@@ -28,6 +28,8 @@ int main(int agr_c,char **arg_v){
 
 	cout << "Answer Tabu Search: " << g.tabu_search(path) << endl;
 
+	cout << "Answer GRASP: " << g.grasp(path) << endl;
+
   	clock_t end = clock();
 
   	double time = double(end - begin) / CLOCKS_PER_SEC;

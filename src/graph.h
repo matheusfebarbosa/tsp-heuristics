@@ -5,6 +5,7 @@
 #include <string>
 #include <cmath>
 #include <set>
+#include <algorithm>
 
 #define INF 0x6f6f6f
 
@@ -41,4 +42,6 @@ public:
 	int opt_2_test(std::vector<int> &path,int a,int b);
 	int opt_2_ver(std::vector<int> &path,int a,int b);
 	int tabu_search(std::vector<int> &path);
+	int nn_rand(std::vector<int> &path, float alpha);
+	int grasp(std::vector<int> &path);
 };

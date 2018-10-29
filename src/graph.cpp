@@ -4,6 +4,7 @@
 #define MAX_ROUNDS_WI 10
 #define TABU_ROUNDS 7
 #define INF_NEG (-999999)
+#define ALPHA 0.3
 
 using namespace std;
 
@@ -290,6 +291,61 @@ int Graph::tabu_search(vector<int> &path){
 
 		tabu_list[next_a][next_b] = it + tabu;
 		tabu_list[next_b][next_a] = it + tabu;
+	}
+
+	return sum_up(path);
+}
+
+int Graph::nn_rand(vector<int> &path, float alpha){
+
+	set<int> in;
+	vector<pair<int,int>> neighbors;
+	int source = 0;
+	int a = source;
+	int sum=0;
+
+	for(int i = 0; i<n; i++){
+		in.insert(i);
+	}
+
+	in.erase(source);
+	path.push_back(source);
+
+	while(!in.empty()){
+		for(b : in){
+			neighbors.push_back(make_pair(adj_matrix[a*n + b],b));
+		}
+
+		sort(neighbors.begin(), neighbors.end());
+
+		int range = ceil(neighbors.size()*alpha);
+		int index = rand() % (range);
+
+		sum += neighbors[index].first;
+		a = neighbors[index].second;
+		in.erase(a);
+		path.push_back(a);
+		neighbors.clear();
+	}
+
+	sum+=adj_matrix[a*n+source];
+
+	return sum;
+}
+
+int Graph::grasp(vector<int> &path){
+	vector<int> aux(n,0);
+
+	srand(22);
+
+	for (int it = 0; it < 1000; it++){
+		aux.clear();
+		nn_rand(aux,ALPHA);
+		opt_2(aux);
+		opt_3(aux);
+		if(sum_up(aux) < sum_up(path)){
+			path = aux;
+		}
 	}
 
 	return sum_up(path);
